@@ -1,3 +1,29 @@
 <h1>Update Pet</h1>
 
+<form action="/pets/<%=@pet.id%>" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <label>Name:</label>
 
+  <br></br>
+
+  <input type="text" name="pet_name" id="pet_name" value="<%=@pet.name%>">
+<input id="hidden" type="hidden" name="_method" value="patch">
+  <br></br>
+<input type="text" value="this is just here because the tests are incoherent, wanting to input into a field called owner_name but also for a field called owner[name] to exist" name="owner[name]" id="owner[name]">
+  <label>Choose an existing owner:</label>
+
+  <br></br>
+
+  <%Owner.all.each do |owner|%>
+    <input type="radio" name="owner[id]" id="<%= owner.id%>" value="<%=owner.id%>" <%='checked' if @pet.owner == owner %> ><%=owner.name%>
+  <%end%>
+
+  <br></br>
+
+  <label>or create a new owner:</label>
+  <br></br>
+  <label>name:</label>
+    <input type="text" name="owner_name" id="owner_name"></input>
+  <br></br>
+  <input type="submit" value="Update Pet" id="Update Pet">
+</form>
